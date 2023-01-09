@@ -414,7 +414,9 @@ public class IActivityManagerProxy extends ClassInvocationStub {
             String resolvedType = (String) args[intentIndex + 1];
             Intent proxyIntent = BlackBoxCore.getBActivityManager().sendBroadcast(intent, resolvedType, BActivityThread.getUserId());
             if (proxyIntent != null) {
-                proxyIntent.setExtrasClassLoader(BActivityThread.getApplication().getClassLoader());
+                if (BActivityThread.getApplication()!=null) {
+                    proxyIntent.setExtrasClassLoader(BActivityThread.getApplication().getClassLoader());
+                }
                 ProxyBroadcastRecord.saveStub(proxyIntent, intent, BActivityThread.getUserId());
                 args[intentIndex] = proxyIntent;
             }

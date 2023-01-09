@@ -1,10 +1,13 @@
 package top.niunaijun.blackbox.fake.service.context.providers;
 
 import android.os.IInterface;
+import android.util.Log;
 
 import java.lang.reflect.Method;
+import java.util.Arrays;
 
 import black.android.content.BRAttributionSource;
+import top.niunaijun.blackbox.BlackBoxCore;
 import top.niunaijun.blackbox.app.BActivityThread;
 import top.niunaijun.blackbox.fake.hook.ClassInvocationStub;
 import top.niunaijun.blackbox.utils.compat.ContextCompat;
@@ -46,6 +49,7 @@ public class ContentProviderStub extends ClassInvocationStub implements BContent
 
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+
         if ("asBinder".equals(method.getName())) {
             return method.invoke(mBase, args);
         }
@@ -54,7 +58,8 @@ public class ContentProviderStub extends ClassInvocationStub implements BContent
             if (arg instanceof String) {
                 args[0] = mAppPkg;
             } else if (arg.getClass().getName().equals(BRAttributionSource.getRealClass().getName())) {
-                ContextCompat.fixAttributionSourceState(arg, BActivityThread.getBUid());
+//                ContextCompat.fixAttributionSourceState(arg, BActivityThread.getBUid());
+                ContextCompat.fixAttributionSourceState(arg, BlackBoxCore.getHostUid());//修复bug   java.lang.SecurityException: Calling uid: 10582 doesn't match source uid: 10001
             }
         }
         try {
