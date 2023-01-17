@@ -49,7 +49,8 @@ class FakeManagerActivity : BaseActivity() {
         mAdapter = RVAdapter<FakeLocationBean>(this,FakeLocationAdapter()).bind(viewBinding.recyclerView)
             .setItemClickListener { _, data, _ ->
 
-                val intent = Intent(this, FollowMyLocationOverlay::class.java)
+//                val intent = Intent(this, FollowMyLocationOverlay::class.java)
+                val intent = Intent(this, SetFakeLocationActivity::class.java)
                 intent.putExtra("location", data.fakeLocation)
                 intent.putExtra("pkg", data.packageName)
 

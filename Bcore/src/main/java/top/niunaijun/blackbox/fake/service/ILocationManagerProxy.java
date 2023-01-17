@@ -123,6 +123,35 @@ public class ILocationManagerProxy extends BinderInvocationStub {
         }
     }
 
+    @ProxyMethod("registerLocationListener")
+    public static class RegisterLocationListener extends MethodHook{
+
+        @Override
+        protected Object hook(Object who, Method method, Object[] args) throws Throwable {
+
+            if (args[2] instanceof IInterface) {
+                IInterface listener = (IInterface) args[2];
+                BLocationManager.get().requestLocationUpdates(listener.asBinder());
+                return 0;
+            }
+            return method.invoke(who, args);
+        }
+    }
+
+    @ProxyMethod("unregisterLocationListener")
+    public static class UnregisterLocationListener extends MethodHook{
+
+        @Override
+        protected Object hook(Object who, Method method, Object[] args) throws Throwable {
+            if (args[0] instanceof IInterface) {
+                IInterface listener = (IInterface) args[0];
+                BLocationManager.get().removeUpdates(listener.asBinder());
+                return 0;
+            }
+            return method.invoke(who, args);
+        }
+    }
+
     @ProxyMethod("getProviderProperties")
     public static class GetProviderProperties extends MethodHook {
 

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+
+    <TextView
+        android:id="@+id/tv_location"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <TextView
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="经度："/>
+    <EditText
+        android:id="@+id/edit_GPSLongitude"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="经度"
+        android:inputType="numberDecimal"/>
+    <TextView
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="纬度："/>
+    <EditText
+        android:id="@+id/edit_GPSLatitude"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="纬度"
+        android:inputType="numberDecimal"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="坐标转化:"/>
+    <RadioGroup
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <RadioButton
+            android:id="@+id/radio_earth"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="地球坐标系"
+            android:checked="true"/>
+        <RadioButton
+            android:id="@+id/radio_Mars"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="火星坐标系"/>
+        <RadioButton
+            android:id="@+id/radio_bd09"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="BD09坐标。百度地图专属坐标"/>
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/btn_save"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="保存"/>
+    <Button
+        android:id="@+id/btn_getLocation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="坐标获取"/>
+
+
+</LinearLayout>

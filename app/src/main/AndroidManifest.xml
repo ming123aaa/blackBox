@@ -16,6 +16,9 @@
         android:theme="@style/Theme.BlackBox"
         tools:targetApi="n">
         <activity
+            android:name=".view.fake.SetFakeLocationActivity"
+            android:exported="false" />
+        <activity
             android:name=".view.fake.FollowMyLocationOverlay"
             android:exported="false" />
         <activity android:name=".view.setting.SettingActivity" />

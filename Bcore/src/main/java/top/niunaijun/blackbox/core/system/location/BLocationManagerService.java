@@ -1,7 +1,11 @@
 package top.niunaijun.blackbox.core.system.location;
 
+import android.location.Location;
+import android.os.Build;
+import android.os.Bundle;
 import android.os.IBinder;
 import android.os.IInterface;
+import android.os.IRemoteCallback;
 import android.os.Parcel;
 import android.os.RemoteException;
 import android.util.AtomicFile;
@@ -11,6 +15,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -258,7 +263,18 @@ public class BLocationManagerService extends IBLocationManagerService.Stub imple
                 }
                 lastLocation = location;
                 l = System.currentTimeMillis();
-                BlackBoxCore.get().getHandler().post(() -> BRILocationListener.get(iInterface).onLocationChanged(location.convert2SystemLocation()));
+                if (Build.VERSION.SDK_INT >= 31) {
+                    List<Location>  locationList=new ArrayList<>();
+                    locationList.add(location.convert2SystemLocation());
+                    BlackBoxCore.get().getHandler().post(() -> BRILocationListener.get(iInterface).onLocationChanged(locationList, new IRemoteCallback.Stub() {
+                        @Override
+                        public void sendResult(Bundle data) throws RemoteException {
+
+                        }
+                    }));
+                } else {
+                    BlackBoxCore.get().getHandler().post(() -> BRILocationListener.get(iInterface).onLocationChanged(location.convert2SystemLocation()));
+                }
             }
         });
     }
