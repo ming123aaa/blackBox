@@ -15,6 +15,11 @@ public class BuildCompat {
         return 0;
     }
 
+    // 13
+    public static boolean isAndroid13() {
+        return Build.VERSION.SDK_INT >= 32|| (Build.VERSION.SDK_INT >= 31 && Build.VERSION.PREVIEW_SDK_INT == 1);
+    }
+
     // 12
     public static boolean isS() {
         return Build.VERSION.SDK_INT >= 31 || (Build.VERSION.SDK_INT >= 30 && Build.VERSION.PREVIEW_SDK_INT == 1);

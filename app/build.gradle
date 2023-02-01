@@ -68,8 +68,8 @@ android {
         }
 
         release {
-            debuggable true  //todo debug
-            jniDebuggable true //todo debug
+            debuggable false  //todo debug
+            jniDebuggable false //todo debug
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
